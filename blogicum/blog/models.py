@@ -1,8 +1,6 @@
-# Django
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Local Django
 from core.models import PublishedModel
 from .constants import MAX_LENGTH
 
@@ -69,6 +67,7 @@ class Post(PublishedModel):
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
+        ordering = ('-pub_date',)
 
     def __str__(self) -> str:
         return self.title

@@ -1,20 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
-from blog.models import Post, Category
+from .models import Post, Category
 from .constants import TOTAL_POSTS
 
 
 def index(request):
     template = 'blog/index.html'
-    post_list = filter_search(Post.objects).order_by('-pub_date')[:TOTAL_POSTS]
+    post_list = filter_search(Post.objects)[:TOTAL_POSTS]
     context = {'post_list': post_list}
     return render(request, template, context)
 
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    post = get_object_or_404(filter_search(Post.objects.all()), id=id)
+    post = get_object_or_404(filter_search(Post.objects), id=id)
     context = {'post': post}
     return render(request, template, context)
 
